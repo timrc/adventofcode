@@ -1,13 +1,14 @@
+from common import run, read_lines
+
 def p1():
     data = {}
-    with open('p7.txt') as file:
-        for l in file:
-            struct = l.split('->')
-            x = struct[0].split('(')[0].strip()
-            has_children = len(struct) > 1
-            if has_children:
-                for s in struct[1].split(','):
-                    data[s.strip()] = x
+    for line in read_lines(7):
+        struct = line.split('->')
+        x = struct[0].split('(')[0].strip()
+        has_children = len(struct) > 1
+        if has_children:
+            for s in struct[1].split(','):
+                data[s.strip()] = x
 
     bottom = None
     node, parent = data.items()[0]
@@ -23,16 +24,15 @@ def p2():
     children = {}
     parents = {}
     weight = {}
-    with open('p7.txt') as file:
-        for l in file:
-            struct = l.split('->')
-            x = struct[0].split('(')[0].strip()
-            weight[x] = int(struct[0].split('(')[1].split(')')[0].strip())
-            children[x] = []
-            if len(struct) > 1:
-                for s in struct[1].split(','):
-                    parents[s.strip()] = x
-                    children[x].append(s.strip())
+    for line in read_lines(7):
+        struct = line.split('->')
+        x = struct[0].split('(')[0].strip()
+        weight[x] = int(struct[0].split('(')[1].split(')')[0].strip())
+        children[x] = []
+        if len(struct) > 1:
+            for s in struct[1].split(','):
+                parents[s.strip()] = x
+                children[x].append(s.strip())
 
     root = None
     node, parent = parents.items()[0]
@@ -58,7 +58,6 @@ def p2():
             ma = max(vals)
             if mi != ma:
                 diff = ma - mi
-                print x, diff, ws
                 for a,b in ws.items():
                     if b == ma:
                         print a, weight[a], diff, weight[a] - diff
@@ -66,4 +65,5 @@ def p2():
 
     set_weight(root)
 
-p2()
+if __name__ == '__main__':
+    run(p1, p2)

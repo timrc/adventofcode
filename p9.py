@@ -1,4 +1,5 @@
 from collections import Counter
+from common import run, read_lines
 
 words = ['a', 'b', 'c', 'a']
 
@@ -39,14 +40,24 @@ def find_groups(stream):
                 open_stack.pop()
                 groups += 1
                 continue
-    print total, removed
-    return removed
+    return total, removed
 
 def p1():
     groups = 0
-    with open('p9_full.txt') as file:
-        for line in file:
-            groups += find_groups(line.strip())
+
+    for line in read_lines(9, 1):
+        total, removed = find_groups(line)
+        groups += total
     print groups
 
-p1()
+def p2():
+    groups = 0
+
+    for line in read_lines(9, 1):
+        total, removed = find_groups(line)
+        groups += removed
+    print groups
+
+
+if __name__ == '__main__':
+    run(p1, p2)

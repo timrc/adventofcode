@@ -1,3 +1,5 @@
+from common import run, read_lines, read_lines_int_array
+
 def solve(line):
     data = {}
 
@@ -66,13 +68,6 @@ def solve(line):
             break
     print sum(data.values())
 
-def p1():
-    # 810
-    with open('p11.txt') as file:
-        for line in file:
-            solve(line.strip())
-
-
 def solve2(line):
     x = 0
     y = 0
@@ -103,15 +98,20 @@ def solve2(line):
         distances.append(new_distance)
         if new_distance > distance:
             distance = new_distance
-    print distance, distances
+    print distance
+
+def p1():
+    # 810
+    for line in read_lines(11):
+        solve(line)
 
 def p2():
     # Distance:
     #       http://althenia.net/svn/stackoverflow/hexgrid.png?usemime=1&rev=3
     #       https://stackoverflow.com/questions/5084801/manhattan-distance-between-tiles-in-a-hexagonal-grid
     # 1567
-    with open('p11.txt') as file:
-        for line in file:
-            solve2(line.strip())
+    for line in read_lines(11):
+        solve2(line)
 
-p2()
+if __name__ == '__main__':
+    run(p1, p2)
