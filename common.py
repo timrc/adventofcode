@@ -6,13 +6,17 @@ def run(*problems):
     if func:
         func()
 
-def read_lines(problem, sub_problem=None):
+def read_lines_raw(problem, sub_problem=None):
     file_name = 'p%d' % problem
     if sub_problem:
-        file_name = '%s.%d' % (file_name, sub_problem)
+        file_name = '%s.%s' % (file_name, str(sub_problem))
     with open('data/%s.txt' % file_name) as file:
         for line in file:
-            yield line.strip()
+            yield line[:-1]
+
+def read_lines(problem, sub_problem=None):
+    for line in read_lines_raw(problem, sub_problem):
+        yield line.strip()
 
 def read_lines_array(problem, separator=' ', sub_problem=None):
     for line in read_lines(problem, sub_problem):
