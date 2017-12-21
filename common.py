@@ -12,7 +12,8 @@ def read_lines_raw(problem, sub_problem=None):
         file_name = '%s.%s' % (file_name, str(sub_problem))
     with open('data/%s.txt' % file_name) as file:
         for line in file:
-            yield line[:-1]
+            yield line.strip('\n')
+            # yield line[:-1]
 
 def read_lines(problem, sub_problem=None):
     for line in read_lines_raw(problem, sub_problem):
